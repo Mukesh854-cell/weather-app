@@ -12,7 +12,7 @@ body {
 }
 
 .app-weather {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 30px 20px;
 }
@@ -141,4 +141,36 @@ body {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.8);
     font-family:'Courier New', Courier, monospace;
+}
+
+.forecast-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.forecast-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 20px 10px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.day-name {
+    font-weight: bold;
+    margin-bottom: 12px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+    padding-bottom: 8px;
+}
+
+.forecast-card p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 6px;
+    text-align: left;
 }
