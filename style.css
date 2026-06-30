@@ -113,6 +113,11 @@ body {
     font-weight: 300;
 }
 
+.weather-icon {
+    width: 100px;
+    height: 100px;
+}
+
 .weather-data .temp {
     color: brown;
     font-size: 3rem;
@@ -173,4 +178,20 @@ body {
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 6px;
     text-align: left;
+}
+
+.forecast-time-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 6px;
+}
+
+.forecast-time-row span {
+    font-size: 15px;
+}
+
+.small-icon {
+    width: 30px;
+    height: 30px;
 }

@@ -14,16 +14,19 @@ async function getWeather(city) {
     displayArea.innerHTML = `
     <div class="weather-data">
         <h2>${data.name}, ${data.sys.country}</h2>
+        <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].description}" class="weather-icon">
         <div class="temp">${Math.round(data.main.temp)}°C</div>
         <p class="condition">${data.weather[0].description}</p>
         <div class="details"> 
             <p>Feels like: ${Math.round(data.main.feels_like)}°C</p>
             <p>Humidity: ${data.main.humidity}%</p>
             <p>Wind: ${data.wind.speed} m/s</p>
-            <p>Pressure: ${data.main.pressure} hPa</p>
+            <p id="aqiDisplay">Air Quality: Loading...</p>
         </div>
     </div>
     `;
+
+    getAQI(data.coord.lat, data.coord.lon);
 }
 
 async function getForecast(city) {
@@ -66,7 +69,14 @@ async function getForecast(city) {
         dayEntries.forEach((entry) => {
             const time = entry.dt_txt.split(" ")[1].slice(0, 5);
             const condition = entry.weather[0].main;
-            timesHTML += `<p>${time} - ${Math.round(entry.main.temp)}°C - ${condition}</p>`;
+            const icon = entry.weather[0].icon;
+            timesHTML += `
+            <div class="forecast-time-row">
+            <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${condition}" class="small-icon">
+            <span>${time} - ${Math.round(entry.main.temp)}°C - ${condition}</span>
+            </div>
+            `;
+            
         });
 
         card.innerHTML = `
@@ -105,14 +115,28 @@ async function getWeatherByCoords(lat, lon) {
     displayArea.innerHTML = `
         <div class="weather-data">
             <h2>${data.name}, ${data.sys.country}</h2>
+            <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].description}" class="weather-icon">
             <div class="temp">${Math.round(data.main.temp)}°C</div>
             <p class="condition">${data.weather[0].description}</p>
             <div class="details">
                 <p>Feels like: ${Math.round(data.main.feels_like)}°C</p>
                 <p>Humidity: ${data.main.humidity}%</p>
                 <p>Wind: ${data.wind.speed} m/s</p>
-                <p>Pressure: ${data.main.pressure} hPa</p>
+                <p id="aqiDisplay">Air Quality: Loading...</p>
             </div>
         </div>
     `;
+
+    getAQI(data.coord.lat, data.coord.lon)
 };
+
+async function getAQI(lat, lon) {
+    let response = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=us_aqi`);
+    let data = await response.json();
+
+    console.log(data)
+
+    const aqiValue = data.current.us_aqi;
+
+    document.getElementById('aqiDisplay').textContent = `Air Quality: ${aqiValue}`;
+}
