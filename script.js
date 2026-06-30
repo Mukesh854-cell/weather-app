@@ -13,13 +13,15 @@ async function getWeather(city) {
 
     displayArea.innerHTML = `
     <div class="weather-data">
-        <h2>${data.name}, ${data.sys.country}</h2>
-        <h1>${Math.round(data.main.temp)}°C</h1>
-        <p>${data.weather[0].description}</p>
-        <p>Feels like: ${Math.round(data.main.feels_like)}°C</p>
-        <p>Humidity: ${data.main.humidity}%</p>
-        <p>Wind: ${data.wind.speed} m/s</p>
-        <p>Pressure: ${data.main.pressure} hPa</p>
+            <h2>${data.name}, ${data.sys.country}</h2>
+            <div class="temp">${Math.round(data.main.temp)}°C</div>
+            <p class="condition">${data.weather[0].description}</p>
+        <div class="details"> 
+            <p>Feels like: ${Math.round(data.main.feels_like)}°C</p>
+            <p>Humidity: ${data.main.humidity}%</p>
+            <p>Wind: ${data.wind.speed} m/s</p>
+            <p>Pressure: ${data.main.pressure} hPa</p>
+        </div>
     </div>
     `;
 }

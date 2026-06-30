@@ -92,22 +92,53 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.weather-data {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.display-area {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.placeholder-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 18px;
 }
 
 .weather-data h2 {
     color: gold;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 300;
 }
 
-.weather-data h1 {
+.weather-data .temp {
     color: brown;
+    font-size: 3rem;
+    font-weight: 200;
+    margin: 10px 0;
 }
 
-.weather-data p {
-    margin-top: 5px;
+.weather-data .condition {
+    margin-bottom: 20px;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.3rem;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1pz solid rgba(255, 255, 255, 0.2);
+}
+
+.details p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    font-family:'Courier New', Courier, monospace;
 }
