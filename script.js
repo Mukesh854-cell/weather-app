@@ -13,9 +13,9 @@ async function getWeather(city) {
 
     displayArea.innerHTML = `
     <div class="weather-data">
-            <h2>${data.name}, ${data.sys.country}</h2>
-            <div class="temp">${Math.round(data.main.temp)}°C</div>
-            <p class="condition">${data.weather[0].description}</p>
+        <h2>${data.name}, ${data.sys.country}</h2>
+        <div class="temp">${Math.round(data.main.temp)}°C</div>
+        <p class="condition">${data.weather[0].description}</p>
         <div class="details"> 
             <p>Feels like: ${Math.round(data.main.feels_like)}°C</p>
             <p>Humidity: ${data.main.humidity}%</p>
@@ -84,4 +84,35 @@ searchBtn.addEventListener('click', () => {
     let city = searchInput.value;
     getWeather(city);
     getForecast(city);
-})
+});
+
+locationBtn.addEventListener('click', () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        getWeatherByCoords(lat, lon);
+    });
+});
+
+async function getWeatherByCoords(lat, lon) {
+
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
+    let data = await response.json();
+
+    console.log(data);
+
+    displayArea.innerHTML = `
+        <div class="weather-data">
+            <h2>${data.name}, ${data.sys.country}</h2>
+            <div class="temp">${Math.round(data.main.temp)}°C</div>
+            <p class="condition">${data.weather[0].description}</p>
+            <div class="details">
+                <p>Feels like: ${Math.round(data.main.feels_like)}°C</p>
+                <p>Humidity: ${data.main.humidity}%</p>
+                <p>Wind: ${data.wind.speed} m/s</p>
+                <p>Pressure: ${data.main.pressure} hPa</p>
+            </div>
+        </div>
+    `;
+};
