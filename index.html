@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEATHER APP</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header class="title">
-        <h2>WeatherNow</h2>
-    </header>
-    <div class="check">
-        <input type="text" placeholder="Enter your city" class="input-box">
-        <button class="search">Search</button>
+    <div class="app-weather">
+        <header class="title">
+            <h2>WeatherNow</h2>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" placeholder="Search city..." id="cityInput" class="input-box">
+                <button class="search-btn">Search</button>
+            </div>
+            <button class="location-btn">Use My Location</button>
+        </div>
+
+        <main class="display-area" id="displayArea">
+            <p class="placeholder-text">Search a city to see weather ⛅</p>
+        </main>
     </div>
-    <button class="current-location">Current Location</button>
-    <main class="display-area"></main>
 
     <script src="script.js"></script>
 </body>
+
 </html>
