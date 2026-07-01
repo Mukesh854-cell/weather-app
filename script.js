@@ -27,6 +27,7 @@ async function getWeather(city) {
     `;
 
     getAQI(data.coord.lat, data.coord.lon);
+    setBackground(data.weather[0].main);
 }
 
 async function getForecast(city) {
@@ -127,7 +128,8 @@ async function getWeatherByCoords(lat, lon) {
         </div>
     `;
 
-    getAQI(data.coord.lat, data.coord.lon)
+    getAQI(data.coord.lat, data.coord.lon);
+    setBackground(data.weather[0].main);
 };
 
 async function getAQI(lat, lon) {
@@ -139,4 +141,22 @@ async function getAQI(lat, lon) {
     const aqiValue = data.current.us_aqi;
 
     document.getElementById('aqiDisplay').textContent = `Air Quality: ${aqiValue}`;
+}
+
+
+function setBackground(condition) {
+
+    if (condition === "Rain") {
+        document.body.style.background = 'linear-gradient(135deg, #373b44, #4286f4)'; 
+    } else if (condition === "Clear") {
+        document.body.style.background = 'linear-gradient(135deg, #f7971e, #ffd200)';
+    } else if (condition === "Clouds") {
+        document.body.style.background = 'linear-gradient(135deg, #757f9a, #d7dde8)';
+    } else if (condition === "Snow") {
+        document.body.style.background = 'linear-gradient(135deg, #e0eafc, #cfdef3)';
+    } else if (condition === "Thunderstorm") {
+        document.body.style.background = 'linear-gradient(135deg, #0f0c29, #302b63)';
+    } else if (condition === "Mist") {
+        document.body.style.background = 'linear-gradient(135deg, #606c88, #3f4c6b)';
+    }
 }
